@@ -18,4 +18,5 @@ The sole purpose of this project is to show how to run web  app using docker
 **How to use**
 
   * Run `docker-compose up --build` to run all three containers at once.
+  * Open the browser at [http://localhost:34000](http://localhost:3000
 
