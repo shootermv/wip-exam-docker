@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-
+import {Users} from './Users.js'
 class App extends Component {
   constructor(props) {
     super(props);
+    this.reload = false;
     this.state = {
       name: '',
       age:''
@@ -25,33 +26,31 @@ class App extends Component {
 
   send(e) {
     e.preventDefault();
-   
-    
-   /* fetch("http://localhost:4000/users",
-    {
-        method: "POST",
-        body: data
-    })
-    .then(function(res){ return res.json(); })
-    .then(function(data){ console.log( JSON.stringify( data ) ) })*/
+    // validation
+    if ( this.state.name.trim() === '' || !this.state.age ) { return; }
+    this.reload = true;
+
     fetch('http://localhost:4000/users', {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-      mode: "cors", // no-cors, cors, *same-origin
-      cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: "same-origin", // include, same-origin, *omit
-      headers: {
-          "Content-Type": "application/json; charset=utf-8",
-          // "Content-Type": "application/x-www-form-urlencoded",
-      },
-      redirect: "follow", // manual, *follow, error
-      referrer: "no-referrer", // no-referrer, *client
-      body: JSON.stringify( this.state ) // body data type must match "Content-Type" header
-  })
-  .then(response => response.json()) // parses response to JSON
-  .catch(error => console.error(`Fetch Error =\n`, error));
-
-
-
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+            "Content-Type": "application/json; charset=utf-8"
+        },
+        redirect: "follow", // manual, *follow, error
+        referrer: "no-referrer", // no-referrer, *client
+        body: JSON.stringify( this.state ) // body data type must match "Content-Type" header
+    })
+    .then(response => {
+      response.json();
+      this.setState({
+        name: '',
+        age:''
+      });
+      this.reload = false;
+    }) // parses response to JSON
+    .catch(error => console.error(`Fetch Error =\n`, error));
   }
 
 
@@ -60,15 +59,19 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React!!!</h1>
+          <h1 className="App-title">Welcome to React</h1>
         </header>
         <p className="App-intro">
-         <input name="name" value={this.state.name}
+         <input name="name" value={this.state.name} placeholder="name"
          onChange={this.handleInputChange}/><br/>
-         <input name="age" type="number" value={this.state.age}
+         <input name="age" type="number" value={this.state.age} placeholder="age"
          onChange={this.handleInputChange}/><br/>
          <button onClick={this.send}>submit</button>
         </p>
+        <hr/>
+        <div>
+          <Users reload={this.reload}/>
+        </div>
       </div>
     );
   }

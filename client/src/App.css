@@ -26,3 +26,9 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+ .user-row {
+   border-bottom: 1px solid grey;
+ }
+ .user-row span{
+   margin-left:20px;
+ }
