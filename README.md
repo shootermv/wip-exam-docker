@@ -19,5 +19,5 @@ And also [this](http://mherman.org/blog/2017/12/07/dockerizing-a-react-app/)
 **How to use**
 
   * Run `docker-compose up --build` to run all three containers at once.
-  * Open the browser at [http://localhost:34000](http://localhost:3000)
+  * Open the browser at [http://localhost:3000](http://localhost:3000)
 
