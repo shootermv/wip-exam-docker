@@ -24,3 +24,25 @@ services:
     image: mongo # specify image to build container from
     ports:
       - "27017:27017" # specify port forewarding
+      
+  e2e: # name of the third service
+    container_name: e2e
+    build:
+      context: e2e
+      dockerfile: Dockerfile
+    depends_on:
+      - client
+    environment:
+      - CYPRESS_baseUrl=http://client:3000
+    command: npx cypress run
+    # mount the host directory e2e/cypress and the file e2e/cypress.json as
+    # volumes within the container
+    # this means that:
+    #  1. anything that Cypress writes to these folders (e.g., screenshots,
+    #     videos) appears also on the Docker host's filesystem
+    #  2. any change that the developer applies to Cypress files on the host
+    #     machine immediately takes effect within the e2e container (no docker
+    #     rebuild required).
+    volumes:
+      - ./e2e/cypress:/usr/src/e2e/cypress
+      - ./e2e/cypress.json:/usr/src/e2e/cypress.json      
