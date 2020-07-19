@@ -2,7 +2,13 @@
 
 The sole purpose of this project is to show how to run web  app using docker<br>
 Inspired by [this](https://scotch.io/tutorials/create-a-mean-app-with-angular-2-and-docker-compose) grate tutorial<br>
-And also [this](http://mherman.org/blog/2017/12/07/dockerizing-a-react-app/)
+And also [this](http://mherman.org/blog/2017/12/07/dockerizing-a-react-app/)  
+The app consists from:
+* `client`  (react) 
+* `server` (node, express)
+* `database` (mongodb)
+containers
+
 ## Pre Requirements
 
   1. [Docker](https://docs.docker.com/)
