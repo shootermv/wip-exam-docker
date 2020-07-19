@@ -6,7 +6,7 @@ And also [this](http://mherman.org/blog/2017/12/07/dockerizing-a-react-app/)
 The app consists from:
 * `client`  (react) 
 * `server` (node, express)
-* `database` (mongodb)
+* `database` (mongodb)  
 containers
 
 ## Pre Requirements
